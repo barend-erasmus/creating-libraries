@@ -1,0 +1,22 @@
+{
+  "name": "creating-libraries",
+  "version": "1.0.0",
+  "description": "A simple guide to creating libraries",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify ./src/main.js --s Main -o ./src/bundle-main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barend-erasmus/creating-libraries.git"
+  },
+  "author": "Barend Erasmus",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/barend-erasmus/creating-libraries/issues"
+  },
+  "homepage": "https://github.com/barend-erasmus/creating-libraries#readme",
+  "dependencies": {
+    "d3": "^5.5.0"
+  }
+}
