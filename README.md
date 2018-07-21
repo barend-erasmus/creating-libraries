@@ -10,7 +10,7 @@ When creating a software solution, we should always keep the future in mind espe
 
 ## What does a bad library look like?
 
-![Bad](https://raw.githubusercontent.com/barend-erasmus/creating-libraries/master/images/bad.svg?sanitize=true)
+![Bad](https://raw.githubusercontent.com/barend-erasmus/creating-libraries/master/images/bad.jpg)
 
 ```javascript
 function initialize() {
