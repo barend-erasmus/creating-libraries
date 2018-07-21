@@ -10,28 +10,135 @@ When creating a software solution, we should always keep the future in mind espe
 
 ## What does a bad library look like?
 
-![Bad](https://raw.githubusercontent.com/barend-erasmus/creating-libraries/master/images/bad.jpg)
+![Bad](https://raw.githubusercontent.com/barend-erasmus/creating-libraries/master/images/chart.jpg)
 
-Here we have create a library with
+Here we have created a library for a component which creates colored rectangles for each datapoint.
 
 ```javascript
-function initialize() {
-  d3.select("svg#bad")
-    .append("circle")
-    .attr("cx", "100")
-    .attr("cy", "100")
-    .attr("r", "50")
-    .attr("fill", "#81F495")
-    .attr("stroke", "#8E8DBE")
-    .attr("stroke-width", "4");
+function initialize(data, height, width) {
+  const fillColors = ["#048A81", "#06D6A0", "#54C6EB", "#8A89C0"];
 
-  d3.select("svg#bad")
-    .append("circle")
-    .attr("cx", "100")
-    .attr("cy", "100")
-    .attr("r", "25")
-    .attr("fill", "#A9E4EF")
-    .attr("stroke", "#7A306C")
-    .attr("stroke-width", "4");
+  const pixelsPerUnit = width / data.reduce((a, b) => a + b);
+
+  d3.select("svg#chart-bad-1")
+    .attr("height", height)
+    .attr("width", width);
+
+  let sum = 0;
+
+  for (let index = 0; index < data.length; index++) {
+    const datum = data[index];
+
+    d3.select("svg#chart-bad-1")
+      .append("rect")
+      .attr("x", sum * pixelsPerUnit)
+      .attr("y", 0)
+      .attr("width", datum * pixelsPerUnit)
+      .attr("height", height)
+      .attr("fill", fillColors[index])
+      .attr("stroke", "#CDA2AB")
+      .attr("stroke-width", "4");
+
+    sum += datum;
+  }
+}
+```
+
+There are many problems with the implementation above such as:
+
+* How can I change the `fill colors`?
+* How can I change the `stroke color`?
+* How can I change the `stroke width`?
+
+## Improvements
+
+We can solve the problems above by adding more parameters to the function.
+
+```javascript
+function initialize(data, height, width, fillColors, strokeColor, strokeWidth) {
+  const pixelsPerUnit = width / data.reduce((a, b) => a + b);
+
+  d3.select("svg#chart-bad-2")
+    .attr("height", height)
+    .attr("width", width);
+
+  let sum = 0;
+
+  for (let index = 0; index < data.length; index++) {
+    const datum = data[index];
+
+    d3.select("svg#chart-bad-2")
+      .append("rect")
+      .attr("x", sum * pixelsPerUnit)
+      .attr("y", 0)
+      .attr("width", datum * pixelsPerUnit)
+      .attr("height", height)
+      .attr("fill", fillColors[index])
+      .attr("stroke", strokeColor)
+      .attr("stroke-width", strokeWidth);
+
+    sum += datum;
+  }
+}
+```
+
+With the parameters added to the function, we can easily change the `fill colors`, `stroke color` and `stroke width` but we won't be able to change the stroke to a `dash array` without any changes to the function.
+
+We can design this function in different way so that it can be easily extended by limiting the function to logic instead of logic and appearance.
+
+## What does a good library look like?
+
+```javascript
+function initialize(data) {
+  const height = d3.select("svg#chart-good").attr("height");
+
+  const width = d3.select("svg#chart-good").attr("width");
+
+  const pixelsPerUnit = width / data.reduce((a, b) => a + b);
+
+  let sum = 0;
+
+  for (let index = 0; index < data.length; index++) {
+    const datum = data[index];
+
+    d3.select("svg#chart-good")
+      .append("rect")
+      .attr("x", sum * pixelsPerUnit)
+      .attr("y", 0)
+      .attr("width", datum * pixelsPerUnit)
+      .attr("height", height)
+      .attr("class", `datum datum-${index}`)
+
+    sum += datum;
+  }
+}
+```
+
+In this implementation, we can see that the function is only concerned with the data and drawing of the chart. We have add two classes namely `datum` and `datum-${index}` which will be used for styling.
+
+```css
+svg#chart-good rect.datum {
+    stroke: #CDA2AB;
+    stroke-width: 4;
+}
+
+svg#chart-good rect.datum-0 {
+    fill: #048A81;
+}
+
+svg#chart-good rect.datum-1 {
+    fill: #06D6A0;
+}
+
+svg#chart-good rect.datum-2 {
+    fill: #54C6EB;
+}
+
+svg#chart-good rect.datum-3 {
+    fill: #8A89C0;
+}
+
+svg#chart-good rect.datum:hover {
+    fill: #CDA2AB;
 }
 ```
