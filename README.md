@@ -4,9 +4,9 @@ A simple guide to creating libraries
 
 ## Introduction
 
-Libraries comes with great benefits but if done incorrectly it could be your worst nightmare.
+Libraries comes with great benefits but if designed incorrectly it could be your worst nightmare.
 
-When creating a software solution, we should always keep the future in mind especially when creating libraries as they usually have a longer lifespan.
+When creating a software solution, we should always keep the future in mind especially when creating libraries as they have a longer lifespan.
 
 ## What does a bad library look like?
 
@@ -44,11 +44,11 @@ function initialize(data, height, width) {
 }
 ```
 
-There are many problems with the implementation above such as:
+There are many problems with this implementation above such as:
 
-* How can I change the `fill colors`?
-* How can I change the `stroke color`?
-* How can I change the `stroke width`?
+* How do I change the `fill colors`?
+* How do I change the `stroke color`?
+* How do I change the `stroke width`?
 
 ## Improvements
 
@@ -84,7 +84,7 @@ function initialize(data, height, width, fillColors, strokeColor, strokeWidth) {
 
 With the parameters added to the function, we can easily change the `fill colors`, `stroke color` and `stroke width` but we won't be able to change the stroke to a `dash array` without any changes to the function.
 
-We can design this function in different way so that it can be easily extended by limiting the function to logic instead of logic and appearance.
+We can design this function in different way so that it can be easily extended. If we limit the function to logic instead of logic and appearance it would be much easier to extend.
 
 ## What does a good library look like?
 
@@ -114,7 +114,7 @@ function initialize(data) {
 }
 ```
 
-In this implementation, we can see that the function is only concerned with the data and drawing of the chart. We have add two classes namely `datum` and `datum-${index}` which will be used for styling.
+In this implementation, we can see that the function is only concerned with the data and the drawing of the chart. We have add two classes namely `datum` and `datum-${index}` which can be used to change its appearance.
 
 ```css
 svg#chart-good rect.datum {
