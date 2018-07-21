@@ -1,0 +1,13 @@
+svg#simple-good circle.outer {
+    fill: #81F495;
+    stroke: #8E8DBE;
+    stroke-width: 4;
+}
+
+svg#simple-good circle.inner {
+    fill: #A9E4EF;
+    stroke: #7A306C;
+    stroke-width: 4;
+
+    stroke-dasharray: 5;
+}

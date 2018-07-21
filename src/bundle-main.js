@@ -18354,8 +18354,158 @@ Object.defineProperty(exports, "event", {get: function() { return d3Selection.ev
 },{"d3-array":1,"d3-axis":2,"d3-brush":3,"d3-chord":4,"d3-collection":5,"d3-color":6,"d3-contour":7,"d3-dispatch":8,"d3-drag":9,"d3-dsv":10,"d3-ease":11,"d3-fetch":12,"d3-force":13,"d3-format":14,"d3-geo":15,"d3-hierarchy":16,"d3-interpolate":17,"d3-path":18,"d3-polygon":19,"d3-quadtree":20,"d3-random":21,"d3-scale":23,"d3-scale-chromatic":22,"d3-selection":24,"d3-shape":25,"d3-time":27,"d3-time-format":26,"d3-timer":28,"d3-transition":29,"d3-voronoi":30,"d3-zoom":31}],33:[function(require,module,exports){
 const d3 = require("d3");
 
+function initialize(data, height, width) {
+  const fillColors = ["#048A81", "#06D6A0", "#54C6EB", "#8A89C0"];
+
+  const pixelsPerUnit = width / data.reduce((a, b) => a + b);
+
+  d3.select("svg#chart-bad-1")
+    .attr("height", height)
+    .attr("width", width);
+
+  let sum = 0;
+
+  for (let index = 0; index < data.length; index++) {
+    const datum = data[index];
+
+    d3.select("svg#chart-bad-1")
+      .append("rect")
+      .attr("x", sum * pixelsPerUnit)
+      .attr("y", 0)
+      .attr("width", datum * pixelsPerUnit)
+      .attr("height", height)
+      .attr("fill", fillColors[index])
+      .attr("stroke", "#CDA2AB")
+      .attr("stroke-width", "4");
+
+    sum += datum;
+  }
+}
+
+module.exports = {
+  initialize,
+};
+
+},{"d3":32}],34:[function(require,module,exports){
+const d3 = require("d3");
+
+function initialize(data, height, width, fillColors, strokeColor, strokeWidth) {
+  const pixelsPerUnit = width / data.reduce((a, b) => a + b);
+
+  d3.select("svg#chart-bad-2")
+    .attr("height", height)
+    .attr("width", width);
+
+  let sum = 0;
+
+  for (let index = 0; index < data.length; index++) {
+    const datum = data[index];
+
+    d3.select("svg#chart-bad-2")
+      .append("rect")
+      .attr("x", sum * pixelsPerUnit)
+      .attr("y", 0)
+      .attr("width", datum * pixelsPerUnit)
+      .attr("height", height)
+      .attr("fill", fillColors[index])
+      .attr("stroke", strokeColor)
+      .attr("stroke-width", strokeWidth);
+
+    sum += datum;
+  }
+}
+
+module.exports = {
+  initialize,
+};
+
+},{"d3":32}],35:[function(require,module,exports){
+const d3 = require("d3");
+
+function initialize(data, height, width, fillColors, strokeColors, strokeWidth) {
+  const pixelsPerUnit = width / data.reduce((a, b) => a + b);
+
+  d3.select("svg#chart-bad-3")
+    .attr("height", height)
+    .attr("width", width);
+
+  let sum = 0;
+
+  for (let index = 0; index < data.length; index++) {
+    const datum = data[index];
+
+    d3.select("svg#chart-bad-3")
+      .append("rect")
+      .attr("x", sum * pixelsPerUnit)
+      .attr("y", 0)
+      .attr("width", datum * pixelsPerUnit)
+      .attr("height", height)
+      .attr("fill", fillColors[index])
+      .attr("stroke", strokeColors[index])
+      .attr("stroke-width", strokeWidth);
+
+    sum += datum;
+  }
+}
+
+module.exports = {
+  initialize,
+};
+
+},{"d3":32}],36:[function(require,module,exports){
+const d3 = require("d3");
+
+function initialize(data) {
+  const height = d3.select("svg#chart-good").attr("height");
+
+  const width = d3.select("svg#chart-good").attr("width");
+
+  const pixelsPerUnit = width / data.reduce((a, b) => a + b);
+
+  let sum = 0;
+
+  for (let index = 0; index < data.length; index++) {
+    const datum = data[index];
+
+    d3.select("svg#chart-good")
+      .append("rect")
+      .attr("x", sum * pixelsPerUnit)
+      .attr("y", 0)
+      .attr("width", datum * pixelsPerUnit)
+      .attr("height", height)
+      .attr("class", `datum datum-${index}`)
+
+    sum += datum;
+  }
+}
+
+module.exports = {
+  initialize
+};
+
+},{"d3":32}],37:[function(require,module,exports){
+const simpleBad = require("./simple-bad");
+const simpleGood = require("./simple-good");
+const simpleOk = require("./simple-ok");
+
+const chartBad1 = require("./chart-bad-1");
+const chartBad2 = require("./chart-bad-2");
+const chartBad3 = require("./chart-bad-3");
+const chartGood = require("./chart-good");
+
+simpleBad.initialize();
+simpleOk.initialize("#81F495", "#8E8DBE", "#A9E4EF", "#7A306C");
+simpleGood.initialize();
+
+chartBad1.initialize([10, 15, 8, 3], 30, 600);
+chartBad2.initialize([10, 15, 8, 3], 30, 600, ["#048A81", "#06D6A0", "#54C6EB", "#8A89C0"], "#CDA2AB", 4);
+chartBad3.initialize([10, 15, 8, 3], 30, 600, ["#048A81", "#06D6A0", "#54C6EB", "#8A89C0"], ["#CDA2AB", "#CDA2AB", "#CDA2AB", "#CDA2AB"], 4);
+chartGood.initialize([10, 15, 8, 3]);
+},{"./chart-bad-1":33,"./chart-bad-2":34,"./chart-bad-3":35,"./chart-good":36,"./simple-bad":38,"./simple-good":39,"./simple-ok":40}],38:[function(require,module,exports){
+const d3 = require("d3");
+
 function initialize() {
-  d3.select("svg#bad")
+  d3.select("svg#simple-bad")
     .append("circle")
     .attr("cx", "100")
     .attr("cy", "100")
@@ -18364,7 +18514,7 @@ function initialize() {
     .attr("stroke", "#8E8DBE")
     .attr("stroke-width", "4");
 
-  d3.select("svg#bad")
+  d3.select("svg#simple-bad")
     .append("circle")
     .attr("cx", "100")
     .attr("cy", "100")
@@ -18378,18 +18528,18 @@ module.exports = {
   initialize
 };
 
-},{"d3":32}],34:[function(require,module,exports){
+},{"d3":32}],39:[function(require,module,exports){
 const d3 = require("d3");
 
 function initialize() {
-  d3.select("svg#good")
+  d3.select("svg#simple-good")
     .append("circle")
     .attr("cx", "100")
     .attr("cy", "100")
     .attr("r", "50")
     .attr("class", "outer");
 
-  d3.select("svg#good")
+  d3.select("svg#simple-good")
     .append("circle")
     .attr("cx", "100")
     .attr("cy", "100")
@@ -18401,11 +18551,11 @@ module.exports = {
   initialize
 };
 
-},{"d3":32}],35:[function(require,module,exports){
+},{"d3":32}],40:[function(require,module,exports){
 const d3 = require("d3");
 
 function initialize(outerFill, outerStroke, innerFill, innerStroke) {
-  d3.select("svg#ok")
+  d3.select("svg#simple-ok")
     .append("circle")
     .attr("cx", "100")
     .attr("cy", "100")
@@ -18414,7 +18564,7 @@ function initialize(outerFill, outerStroke, innerFill, innerStroke) {
     .attr("stroke", outerStroke)
     .attr("stroke-width", "4");
 
-  d3.select("svg#ok")
+  d3.select("svg#simple-ok")
     .append("circle")
     .attr("cx", "100")
     .attr("cy", "100")
@@ -18427,14 +18577,5 @@ function initialize(outerFill, outerStroke, innerFill, innerStroke) {
 module.exports = {
   initialize,
 };
-},{"d3":32}],36:[function(require,module,exports){
-const mainBad = require("./main-bad");
-const mainGood = require("./main-good");
-const mainOk = require("./main-ok");
-
-mainBad.initialize();
-mainOk.initialize("#81F495", "#8E8DBE", "#A9E4EF", "#7A306C");
-mainGood.initialize();
-
-},{"./main-bad":33,"./main-good":34,"./main-ok":35}]},{},[36])(36)
+},{"d3":32}]},{},[37])(37)
 });

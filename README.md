@@ -12,6 +12,8 @@ When creating a software solution, we should always keep the future in mind espe
 
 ![Bad](https://raw.githubusercontent.com/barend-erasmus/creating-libraries/master/images/bad.jpg)
 
+Here we have create a library with
+
 ```javascript
 function initialize() {
   d3.select("svg#bad")

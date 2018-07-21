@@ -1,7 +1,7 @@
 const d3 = require("d3");
 
 function initialize(outerFill, outerStroke, innerFill, innerStroke) {
-  d3.select("svg#ok")
+  d3.select("svg#simple-ok")
     .append("circle")
     .attr("cx", "100")
     .attr("cy", "100")
@@ -10,7 +10,7 @@ function initialize(outerFill, outerStroke, innerFill, innerStroke) {
     .attr("stroke", outerStroke)
     .attr("stroke-width", "4");
 
-  d3.select("svg#ok")
+  d3.select("svg#simple-ok")
     .append("circle")
     .attr("cx", "100")
     .attr("cy", "100")

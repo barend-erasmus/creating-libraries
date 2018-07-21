@@ -1,0 +1,25 @@
+svg#chart-good rect.datum {
+    stroke: #CDA2AB;
+    stroke-width: 4;
+}
+
+svg#chart-good rect.datum-0 {
+    fill: #048A81;
+}
+
+svg#chart-good rect.datum-1 {
+    fill: #06D6A0;
+}
+
+svg#chart-good rect.datum-2 {
+    fill: #54C6EB;
+}
+
+svg#chart-good rect.datum-3 {
+    fill: #8A89C0;
+}
+
+svg#chart-good rect.datum:hover {
+    /* fill-opacity: 0.25; */
+    fill: #CDA2AB;
+}
