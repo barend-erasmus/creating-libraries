@@ -1,6 +1,6 @@
 const d3 = require("d3");
 
-function run(outerFill, outerStroke, innerFill, innerStroke) {
+function initialize(outerFill, outerStroke, innerFill, innerStroke) {
   d3.select("svg#ok")
     .append("circle")
     .attr("cx", "100")
@@ -21,5 +21,5 @@ function run(outerFill, outerStroke, innerFill, innerStroke) {
 }
 
 module.exports = {
-    run,
+  initialize,
 };
