@@ -46,9 +46,9 @@ function initialize(data, height, width) {
 
 There are many problems with this implementation above such as:
 
-* How do I change the `fill colors`?
-* How do I change the `stroke color`?
-* How do I change the `stroke width`?
+- How do I change the `fill colors`?
+- How do I change the `stroke color`?
+- How do I change the `stroke width`?
 
 ## Improvements
 
@@ -107,7 +107,7 @@ function initialize(data) {
       .attr("y", 0)
       .attr("width", datum * pixelsPerUnit)
       .attr("height", height)
-      .attr("class", `datum datum-${index}`)
+      .attr("class", `datum datum-${index}`);
 
     sum += datum;
   }
@@ -118,27 +118,31 @@ In this implementation, we can see that the function is only concerned with the 
 
 ```css
 svg#chart-good rect.datum {
-    stroke: #CDA2AB;
-    stroke-width: 4;
+  stroke: #cda2ab;
+  stroke-width: 4;
 }
 
 svg#chart-good rect.datum-0 {
-    fill: #048A81;
+  fill: #048a81;
 }
 
 svg#chart-good rect.datum-1 {
-    fill: #06D6A0;
+  fill: #06d6a0;
 }
 
 svg#chart-good rect.datum-2 {
-    fill: #54C6EB;
+  fill: #54c6eb;
 }
 
 svg#chart-good rect.datum-3 {
-    fill: #8A89C0;
+  fill: #8a89c0;
 }
 
 svg#chart-good rect.datum:hover {
-    fill: #CDA2AB;
+  fill: #cda2ab;
 }
 ```
+
+## Conclusion
+
+By strictly following the SOLID Principles, we can design better and longer-lasting libraries.
