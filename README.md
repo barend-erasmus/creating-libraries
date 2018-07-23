@@ -4,15 +4,15 @@ A simple guide to creating libraries
 
 ## Introduction
 
-Libraries comes with great benefits but if designed incorrectly it could be your worst nightmare.
+Libraries come with great benefits but if designed incorrectly it could be your worst nightmare.
 
-When creating a software solution, we should always keep the future in mind especially when creating libraries as they have a longer lifespan.
+When creating a software solution, we should always keep the future in mind, especially when creating libraries as they have a longer lifespan.
 
 ## What does a bad library look like?
 
 ![Bad](https://raw.githubusercontent.com/barend-erasmus/creating-libraries/master/images/chart.jpg)
 
-Here we have created a library for a component which creates colored rectangles for each datapoint.
+Here we have created a library for a component that creates colored rectangles for each data-point.
 
 ```javascript
 function initialize(data, height, width) {
@@ -44,7 +44,7 @@ function initialize(data, height, width) {
 }
 ```
 
-There are many problems with this implementation above such as:
+There are many problems with this implementation above:
 
 - How do I change the `fill colors`?
 - How do I change the `stroke color`?
@@ -84,7 +84,7 @@ function initialize(data, height, width, fillColors, strokeColor, strokeWidth) {
 
 With the parameters added to the function, we can easily change the `fill colors`, `stroke color` and `stroke width` but we won't be able to change the stroke to a `dash array` without any changes to the function.
 
-We can design this function in different way so that it can be easily extended. If we limit the function to logic instead of logic and appearance it would be much easier to extend.
+If this function was designed in a different way, it would have been much easier to extend.
 
 ## What does a good library look like?
 
